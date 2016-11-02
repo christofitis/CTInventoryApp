@@ -56,7 +56,37 @@ namespace CTInventoryApp
             
         }
 
-        
+        public void RunSqlCommand(string userSqlCommand)
+        {
+            UserSqlCommand = userSqlCommand;
+
+            DataTable dt = new DataTable();
+            UserSqlCommand = UserSqlCommand;
+
+            using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionString))
+            {
+                try
+                {
+                    SqlCommand sqlCommand = new SqlCommand(UserSqlCommand);
+                    //SqlDataAdapter da = new SqlDataAdapter(sqlCommand);
+                    sqlCommand.Connection = sqlConnection;
+                    sqlConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                    //dt.Clear();
+                    //da.Fill(dt);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error in DataBase Accessor!");
+                }
+            }
+            //MessageBox.Show(dt.Rows[0]["Mfg_Num"].ToString());
+            //return dt;
+
+        }
+
+
     }
 
     

@@ -25,6 +25,7 @@ namespace CTInventoryApp
         public MainWindow()
         {
             InitializeComponent();
+            mfgNumTextBox.Focus();
             //partSearchComboBox_GotFocus(null, null);
             //partSearchComboBox.Items.Add("1");
 
@@ -76,7 +77,26 @@ namespace CTInventoryApp
             }
 
         }
-        
 
+        private void addPartButton_Click(object sender, RoutedEventArgs e)
+        {
+            int i = -1;
+            Int32.TryParse(onHandTextBox.Text.ToString(), out i);
+            
+            if (Int32.TryParse(onHandTextBox.Text.ToString(), out i))
+            {
+                databaseAccessor.RunSqlCommand(string.Format(@"INSERT INTO Parts (Mfg_Num, Description, On_Hand) VALUES ('{0}', '{1}', {2})", mfgNumTextBox.Text, descriptionTextBox.Text, i));
+
+            }
+
+        }
+
+        private void onHandTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                addPartButton_Click(null, null);
+            }
+        }
     }
 }

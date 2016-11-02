@@ -5,19 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CTInventoryApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="423.057" Width="525">
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="325" Margin="0,0,-0.333,-4.333" Width="519"  >
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="394" Margin="0,0,-0.333,0" Width="519"  >
             <TabItem Header="Parts">
                 <Grid Background="#FFE5E5E5">
+                    <Button x:Name="addPartButton" Content="Add Part" HorizontalAlignment="Left" Margin="385,329,0,0" VerticalAlignment="Top" Width="75" Click="addPartButton_Click"/>
+
                     <ComboBox x:Name="partSearchComboBox" HorizontalAlignment="Left"  IsEnabled="True" IsEditable="True" IsTextSearchEnabled="False" Margin="197,46,0,0" VerticalAlignment="Top" Width="120" Loaded="partSearchComboBox_Loaded" GotFocus="partSearchComboBox_GotFocus"/>
                     <Label x:Name="label" Content="MFG Number" HorizontalAlignment="Left" Margin="59,141,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label1" Content="Description" HorizontalAlignment="Left" Margin="71,171,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label2" Content="On Hand" HorizontalAlignment="Left" Margin="84,252,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="mfgNumTextBox" HorizontalAlignment="Left" Height="23" Margin="174,143,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="257"/>
-                    <TextBox x:Name="onHandTextBox" HorizontalAlignment="Left" Height="23" Margin="174,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="67" Margin="174,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="296"/>
+                    <TextBox x:Name="mfgNumTextBox" HorizontalAlignment="Left" Height="23" Margin="174,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" TabIndex="100000"/>
+                    <TextBox x:Name="onHandTextBox" HorizontalAlignment="Left" Height="23" Margin="174,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyDown="onHandTextBox_KeyDown" TabIndex="300000"/>
+                    <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="67" Margin="174,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="296" TabIndex="200000"/>
                     <Label x:Name="label3" Content="Search" HorizontalAlignment="Left" Margin="105,54,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="modifyPartButton" Content="Modify Part" HorizontalAlignment="Left" Margin="226,338,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="TabItem">
