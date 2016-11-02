@@ -24,5 +24,42 @@ namespace CTInventoryApp
         {
             InitializeComponent();
         }
+
+        private void partSearchComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.partSearchComboBox.ApplyTemplate();
+            TextBox textBox = this.partSearchComboBox.Template.FindName("PART_EditableTextBox", this.partSearchComboBox) as TextBox;
+            textBox.SelectionLength = 0;
+
+            if (textBox != null)
+            {
+                textBox.TextChanged += delegate
+                {
+                    this.partSearchComboBox.IsDropDownOpen = true;
+
+                    this.partSearchComboBox.SelectedIndex = -1;
+
+                    this.partSearchComboBox.Items.Filter += a =>
+                    {
+                        if (a.ToString().ToUpper().Contains(textBox.Text.ToUpper()))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    };
+
+                    textBox.SelectionLength = 0;
+                    textBox.CaretIndex = textBox.Text.Length;
+                };
+            }
+        }
+
+        private void partSearchComboBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
