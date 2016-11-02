@@ -29,10 +29,10 @@ namespace CTInventoryApp
             //RunSqlCommand();
         }
 
-        public DataTable RunSqlCommand()
+        public DataTable RunSqlSelectCommand(string s)
         {
             DataTable dt = new DataTable();
-            UserSqlCommand = UserSqlCommand;
+            UserSqlCommand = s;
 
             using (SqlConnection sqlConnection = new SqlConnection(sqlConnectionString))
             {
@@ -56,9 +56,9 @@ namespace CTInventoryApp
             
         }
 
-        public void RunSqlCommand(string userSqlCommand)
+        public void RunSqlCommand(string s)
         {
-            UserSqlCommand = userSqlCommand;
+            UserSqlCommand = s;
 
             DataTable dt = new DataTable();
             UserSqlCommand = UserSqlCommand;

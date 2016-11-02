@@ -32,11 +32,11 @@ namespace CTInventoryApp
         }
         private void partSearchComboBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            partSearchComboBox.Items.Clear();
+            clearAllFields();
             DataTable dt = new DataTable();
-            databaseAccessor.UserSqlCommand = "SELECT Mfg_Num FROM Parts";
+            //databaseAccessor.UserSqlCommand = "SELECT Mfg_Num FROM Parts";
             // MessageBox.Show(databaseAccessor.DbUserName);
-            dt = databaseAccessor.RunSqlCommand();
+            dt = databaseAccessor.RunSqlSelectCommand("SELECT Mfg_Num FROM Parts");
             // MessageBox.Show(dt.Rows.Count.ToString());
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -82,12 +82,26 @@ namespace CTInventoryApp
         {
             int i = -1;
             Int32.TryParse(onHandTextBox.Text.ToString(), out i);
+            //CHeck to see if part already exsists
+            DataTable dt = new DataTable();
+            dt = databaseAccessor.RunSqlSelectCommand(string.Format("Select Mfg_Num from Parts Where Mfg_Num = '{0}'", mfgNumTextBox.Text));
             
-            if (Int32.TryParse(onHandTextBox.Text.ToString(), out i))
-            {
-                databaseAccessor.RunSqlCommand(string.Format(@"INSERT INTO Parts (Mfg_Num, Description, On_Hand) VALUES ('{0}', '{1}', {2})", mfgNumTextBox.Text, descriptionTextBox.Text, i));
+                if (dt.Rows.Count == 0 && Int32.TryParse(onHandTextBox.Text.ToString(), out i) && mfgNumTextBox.Text != null && mfgNumTextBox.Text != "")
+                {
+                    databaseAccessor.RunSqlCommand(string.Format(@"INSERT INTO Parts (Mfg_Num, Description, On_Hand) VALUES ('{0}', '{1}', {2})", mfgNumTextBox.Text, descriptionTextBox.Text, i));
+                    MessageBox.Show("Part Added!");
+                    clearAllFields();
 
-            }
+                }
+                else
+                {
+                    MessageBox.Show("Part already exsists or on hand QTY not valid");
+
+                }
+            
+            
+            
+
 
         }
 
@@ -96,7 +110,47 @@ namespace CTInventoryApp
             if (e.Key == Key.Return)
             {
                 addPartButton_Click(null, null);
+                mfgNumTextBox.Focus();
             }
         }
+
+        private void partSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            //clearAllFields();
+            DataTable dt = new DataTable();
+            if (partSearchComboBox.Text == null || partSearchComboBox.Text == "")
+            {
+                MessageBox.Show("PICK SOMETHING");
+            }
+            else
+            {
+                dt = databaseAccessor.RunSqlSelectCommand(string.Format("SELECT * FROM Parts WHERE Mfg_Num = '{0}'", partSearchComboBox.Text));
+                mfgNumTextBox.Text = dt.Rows[0]["Mfg_Num"].ToString();
+                descriptionTextBox.Text = dt.Rows[0]["Description"].ToString();
+                onHandTextBox.Text = dt.Rows[0]["On_Hand"].ToString();
+            }
+        }
+
+        private void modifyPartButton_Click(object sender, RoutedEventArgs e)
+        {
+            int i = -1;
+            Int32.TryParse(onHandTextBox.Text.ToString(), out i);
+
+            if (Int32.TryParse(onHandTextBox.Text.ToString(), out i))
+            {
+                databaseAccessor.RunSqlCommand(string.Format("UPDATE Parts SET Description = '{0}', On_Hand = '{1}' where Mfg_Num = '{2}'", descriptionTextBox.Text, i, mfgNumTextBox.Text));
+            }
+
+        }
+
+        private void clearAllFields()
+        {
+            partSearchComboBox.Items.Clear();
+            partSearchComboBox.Text = null;
+            mfgNumTextBox.Clear();
+            descriptionTextBox.Clear();
+            onHandTextBox.Clear();
+        }
+
     }
 }
