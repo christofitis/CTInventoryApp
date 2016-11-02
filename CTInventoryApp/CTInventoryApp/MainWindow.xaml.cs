@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data;
 
 namespace CTInventoryApp
 {
@@ -20,9 +21,27 @@ namespace CTInventoryApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        DatabaseAccessor databaseAccessor = new DatabaseAccessor();
         public MainWindow()
         {
             InitializeComponent();
+            //partSearchComboBox_GotFocus(null, null);
+            //partSearchComboBox.Items.Add("1");
+
+        }
+        private void partSearchComboBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            partSearchComboBox.Items.Clear();
+            DataTable dt = new DataTable();
+            databaseAccessor.UserSqlCommand = "SELECT Mfg_Num FROM Parts";
+            // MessageBox.Show(databaseAccessor.DbUserName);
+            dt = databaseAccessor.RunSqlCommand();
+            // MessageBox.Show(dt.Rows.Count.ToString());
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                partSearchComboBox.Items.Add(dt.Rows[i]["Mfg_Num"].ToString());
+            }
+
         }
 
         private void partSearchComboBox_Loaded(object sender, RoutedEventArgs e)
@@ -55,11 +74,9 @@ namespace CTInventoryApp
                     textBox.CaretIndex = textBox.Text.Length;
                 };
             }
-        }
-
-        private void partSearchComboBox_GotFocus(object sender, RoutedEventArgs e)
-        {
 
         }
+        
+
     }
 }

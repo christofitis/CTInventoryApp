@@ -10,13 +10,13 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Left"  VerticalAlignment="Top" Height="325" Margin="0,0,-0.333,-4.333" Width="519"  >
             <TabItem Header="Parts">
                 <Grid Background="#FFE5E5E5">
-                    <ComboBox x:Name="partSearchComboBox" HorizontalAlignment="Left"  IsEnabled="False" IsTextSearchEnabled="False" Margin="197,46,0,0" VerticalAlignment="Top" Width="120" Loaded="partSearchComboBox_Loaded" GotFocus="partSearchComboBox_GotFocus"/>
+                    <ComboBox x:Name="partSearchComboBox" HorizontalAlignment="Left"  IsEnabled="True" IsEditable="True" IsTextSearchEnabled="False" Margin="197,46,0,0" VerticalAlignment="Top" Width="120" Loaded="partSearchComboBox_Loaded" GotFocus="partSearchComboBox_GotFocus"/>
                     <Label x:Name="label" Content="MFG Number" HorizontalAlignment="Left" Margin="59,141,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label1" Content="Description" HorizontalAlignment="Left" Margin="71,171,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label2" Content="On Hand" HorizontalAlignment="Left" Margin="84,252,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="174,143,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="257"/>
-                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="174,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="67" Margin="174,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="296"/>
+                    <TextBox x:Name="mfgNumTextBox" HorizontalAlignment="Left" Height="23" Margin="174,143,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="257"/>
+                    <TextBox x:Name="onHandTextBox" HorizontalAlignment="Left" Height="23" Margin="174,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="67" Margin="174,174,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="296"/>
                     <Label x:Name="label3" Content="Search" HorizontalAlignment="Left" Margin="105,54,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
